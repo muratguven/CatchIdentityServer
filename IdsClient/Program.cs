@@ -51,7 +51,7 @@ namespace IdsClient
             //Client uygulamada alınan access token header'a Bearer token olarak eklenir.
             client.SetBearerToken(tokenResponse.AccessToken);
 
-            var response = await client.GetAsync("http://localhost:3128/api/identity");
+            var response = await client.GetAsync("http://localhost:5001/api/identity");
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);

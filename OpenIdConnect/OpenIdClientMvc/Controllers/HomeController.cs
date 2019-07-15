@@ -43,7 +43,7 @@ namespace OpenIdClientMvc.Controllers
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var content = await client.GetStringAsync("http://localhost:3128/api/identity");
+            var content = await client.GetStringAsync("http://localhost:5001/api/identity");
 
             ViewBag.Json = JArray.Parse(content).ToString();
             return View("json");
