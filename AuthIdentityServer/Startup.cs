@@ -2,8 +2,8 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using IdentityServerAspNetIdentity.Data;
-using IdentityServerAspNetIdentity.Models;
+using AuthIdentityServer.Data;
+using AuthIdentityServer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace IdentityServerAspNetIdentity
+namespace AuthIdentityServer
 {
     public class Startup
     {
