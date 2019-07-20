@@ -21,11 +21,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenIdClientMvc", "OpenIdCo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JavascriptClient", "JavascriptClient", "{F7CDAC4A-73B3-4CDE-8F43-DC2FE08843A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsClient", "JavascriptClient\JsClient\JsClient.csproj", "{F264868C-4CE2-454A-A4D0-62AF66FB6DF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsClient", "JavascriptClient\JsClient\JsClient.csproj", "{F264868C-4CE2-454A-A4D0-62AF66FB6DF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServerAspNetIdentity", "IdentityServerAspNetIdentity\IdentityServerAspNetIdentity.csproj", "{CD89CD64-81FF-4501-9BD2-D5F5223E33DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServerAspNetIdentity", "IdentityServerAspNetIdentity\IdentityServerAspNetIdentity.csproj", "{CD89CD64-81FF-4501-9BD2-D5F5223E33DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthIdentityServer", "AuthIdentityServer\AuthIdentityServer.csproj", "{9D72BA20-88AD-4230-BC10-F1BE5F287F1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthIdentityServer", "AuthIdentityServer\AuthIdentityServer.csproj", "{9D72BA20-88AD-4230-BC10-F1BE5F287F1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsAuthClient", "WindowsAuthClient", "{7E87F545-C981-49FF-8E03-2CD2E3C8895E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

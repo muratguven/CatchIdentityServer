@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+using System.IO;
 using System.Linq;
 
 namespace AuthIdentityServer
@@ -35,9 +36,15 @@ namespace AuthIdentityServer
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
+
+          
             return WebHost.CreateDefaultBuilder(args)
-                    .UseStartup<Startup>()
-                    .UseSerilog((context, configuration) =>
+                                 .UseKestrel()
+                   .UseUrls("http://localhost:5000")
+                   .UseContentRoot(Directory.GetCurrentDirectory())
+                   .UseIISIntegration()
+                   .UseStartup<Startup>()
+                   .UseSerilog((context, configuration) =>
                     {
                         configuration
                             .MinimumLevel.Debug()
