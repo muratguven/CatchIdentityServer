@@ -4,11 +4,13 @@
 
 using AuthIdentityServer.Data;
 using AuthIdentityServer.Models;
+using IdentityServer4;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -85,7 +87,12 @@ namespace AuthIdentityServer
                 throw new Exception("need to configure key material");
             }
 
-            services.AddAuthentication()
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultScheme = IISDefaults.AuthenticationScheme;
+                opt.DefaultAuthenticateScheme = IISDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = IISDefaults.AuthenticationScheme;
+            })                
                 .AddGoogle(options =>
                 {
                     // register your IdentityServer with Google at https://console.developers.google.com
@@ -94,6 +101,7 @@ namespace AuthIdentityServer
                     options.ClientId = "copy client ID from Google here";
                     options.ClientSecret = "copy client secret from Google here";
                 });
+                
         }
 
         public void Configure(IApplicationBuilder app)
