@@ -131,6 +131,27 @@ namespace AuthIdentityServer
                         "catchApi"
                     }
 
+                },
+                //Windows auth client
+                new Client
+                {
+                    ClientId="windowsclient",
+                    ClientName= "Windows Auth",
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+                    RedirectUris = { "https://localhost:44344/signin-oidc" },
+                    FrontChannelLogoutUri = "http://localhost:44344/signout-oidc",
+                    PostLogoutRedirectUris = { "http://localhost:44344/signout-callback-oidc" },
+
+                    AllowOfflineAccess = true,
+                    AllowedScopes =  new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
+                        "catchApi"
+
+                    }
                 }
                 // client credentials flow client
                 //new Client

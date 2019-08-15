@@ -86,7 +86,7 @@ namespace Host.Quickstart.Account
         public async Task<IActionResult> Callback()
         {
             // read external identity from the temporary cookie
-            var result = await HttpContext.AuthenticateAsync(IdentityConstants.ExternalScheme);
+            var result = await HttpContext.AuthenticateAsync(IdentityServer4.IdentityServerConstants.ExternalCookieAuthenticationScheme);
             if (result?.Succeeded != true)
             {
                 throw new Exception("External authentication error");
@@ -164,6 +164,8 @@ namespace Host.Quickstart.Account
                     var roles = groups.Select(x => new Claim(JwtClaimTypes.Role, x.Value));
                     id.AddClaims(roles);
                 }
+
+                //await HttpContext.SignInAsync(IdentityConstants.ExternalScheme, new ClaimsPrincipal(id), props);
 
                 await HttpContext.SignInAsync(
                     IdentityServer4.IdentityServerConstants.ExternalCookieAuthenticationScheme,

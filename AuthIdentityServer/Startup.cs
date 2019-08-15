@@ -5,6 +5,7 @@
 using AuthIdentityServer.Data;
 using AuthIdentityServer.Models;
 using IdentityServer4;
+using IdentityServer4.Configuration;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
@@ -51,17 +52,18 @@ namespace AuthIdentityServer
             });
 
             var builder = services.AddIdentityServer(options =>
-            {
+            {                
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseInformationEvents = true;
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
             })
-                .AddConfigurationStore(options=> {
-                   
+                .AddConfigurationStore(options =>
+                {
+
                     options.ConfigureDbContext = b =>
                         b.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-                        sql=>sql.MigrationsAssembly(migrationsAssembly));
+                        sql => sql.MigrationsAssembly(migrationsAssembly));
                 })
                 .AddOperationalStore(options =>
                 {
@@ -70,7 +72,7 @@ namespace AuthIdentityServer
                     sql => sql.MigrationsAssembly(migrationsAssembly));
 
                     options.EnableTokenCleanup = true;
-                    
+
                 })
                 .AddInMemoryCaching()
                 //.AddInMemoryIdentityResources(Config.GetIdentityResources())
@@ -87,27 +89,29 @@ namespace AuthIdentityServer
                 throw new Exception("need to configure key material");
             }
 
-            services.AddAuthentication(opt =>
-            {
-                opt.DefaultScheme = IISDefaults.AuthenticationScheme;
-                opt.DefaultAuthenticateScheme = IISDefaults.AuthenticationScheme;
-                opt.DefaultChallengeScheme = IISDefaults.AuthenticationScheme;
-            })                
-                .AddGoogle(options =>
-                {
-                    // register your IdentityServer with Google at https://console.developers.google.com
-                    // enable the Google+ API
-                    // set the redirect URI to http://localhost:5000/signin-google
-                    options.ClientId = "copy client ID from Google here";
-                    options.ClientSecret = "copy client secret from Google here";
-                });
+            //services.AddAuthentication(opt =>
+            //{
+            //    opt.DefaultScheme = IISDefaults.AuthenticationScheme;
+            //    opt.DefaultAuthenticateScheme = IISDefaults.AuthenticationScheme;
+            //    opt.DefaultChallengeScheme = IISDefaults.AuthenticationScheme;
+            //})                
+            // .AddGoogle(options =>
+            //    {
+            //        // register your IdentityServer with Google at https://console.developers.google.com
+            //        // enable the Google+ API
+            //        // set the redirect URI to http://localhost:5000/signin-google
+            //        options.ClientId = "copy client ID from Google here";
+            //        options.ClientSecret = "copy client secret from Google here";
+            //    });
                 
         }
 
         public void Configure(IApplicationBuilder app)
         {
-
-            //InitializeDatabase(app);
+            app.UseHsts();
+            app.UseHttpsRedirection();
+            
+            InitializeDatabase(app);
             if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -121,6 +125,7 @@ namespace AuthIdentityServer
             app.UseStaticFiles();
             app.UseIdentityServer();
             app.UseMvcWithDefaultRoute();
+           
         }
 
 

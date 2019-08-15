@@ -22,8 +22,8 @@ namespace CatchApi
             services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", options =>
                 {
-                    options.Authority = "http://localhost:5000";
-                    options.RequireHttpsMetadata = false;
+                    options.Authority = "https://localhost:44345";
+                    options.RequireHttpsMetadata = true;
 
                     options.Audience = "catchApi";
                 });
@@ -33,7 +33,7 @@ namespace CatchApi
                 // this defines a CORS policy called "default"
                 options.AddPolicy("default", policy =>
                 {
-                    policy.WithOrigins("http://localhost:5003")
+                    policy.WithOrigins("https://localhost:44346")
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });
@@ -45,7 +45,8 @@ namespace CatchApi
         {
             app.UseCors("default");
             app.UseAuthentication();
-
+            app.UseHsts();
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
 
