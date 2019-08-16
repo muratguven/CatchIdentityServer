@@ -33,8 +33,9 @@ namespace CatchApi
                 // this defines a CORS policy called "default"
                 options.AddPolicy("default", policy =>
                 {
-                    policy.WithOrigins("https://localhost:44346")
+                    policy.WithOrigins("https://localhost")
                         .AllowAnyHeader()
+                        .AllowAnyOrigin()
                         .AllowAnyMethod();
                 });
             });

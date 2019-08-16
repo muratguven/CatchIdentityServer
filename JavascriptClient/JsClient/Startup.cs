@@ -26,6 +26,8 @@ namespace JsClient
             }
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseHsts();
+            app.UseHttpsRedirection();
 
         }
     }

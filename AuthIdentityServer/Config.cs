@@ -120,9 +120,9 @@ namespace AuthIdentityServer
                     RequirePkce = true,
                     RequireClientSecret = false,
 
-                    RedirectUris =           { "http://localhost:5003/callback.html" },
-                    PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
-                    AllowedCorsOrigins =     { "http://localhost:5003" },
+                    RedirectUris =           { "https://localhost:44342/callback.html" },
+                    PostLogoutRedirectUris = { "https://localhost:44342/index.html" },
+                    AllowedCorsOrigins =     { "https://localhost:44342" },
 
                     AllowedScopes =
                     {

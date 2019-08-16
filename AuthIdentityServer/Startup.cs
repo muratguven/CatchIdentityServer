@@ -43,6 +43,10 @@ namespace AuthIdentityServer
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            //services.AddCors(op=> {
+            //    op.AddPolicy("AllowOrigin", o => o.WithOrigins("https://localhost:44342"));
+            //});
+
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
 
             services.Configure<IISOptions>(iis =>
@@ -108,8 +112,7 @@ namespace AuthIdentityServer
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseHsts();
-            app.UseHttpsRedirection();
+            
             
             InitializeDatabase(app);
             if (Environment.IsDevelopment())
@@ -123,7 +126,13 @@ namespace AuthIdentityServer
             }
 
             app.UseStaticFiles();
+            app.UseHsts();
+            app.UseHttpsRedirection();
             app.UseIdentityServer();
+            //app.UseCors(op =>
+            //  op.WithOrigins("https://localhost:44342")
+            //  .AllowAnyHeader()
+            //) ;
             app.UseMvcWithDefaultRoute();
            
         }
